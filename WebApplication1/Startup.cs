@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PetStore.Model;
 using Microsoft.EntityFrameworkCore;
+using PetStore.Dao;
+using PetStore.Dao.impl;
 
 namespace WebApplication1
 {
@@ -25,6 +27,7 @@ namespace WebApplication1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<PetStoreContext>(opt => opt.UseInMemoryDatabase("PetStore"));
+            services.AddScoped<IPetRepository, PetRepository>();
             services.AddMvc();
         }
 

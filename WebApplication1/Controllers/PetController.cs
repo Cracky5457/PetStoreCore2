@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PetStore.Model;
 using PetStore.Model.Entity;
+using PetStore.Dao;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -13,35 +14,30 @@ namespace PetStore.Controllers
     [Route("api/[controller]")]
     public class PetController : Controller
     {
-        private readonly PetStoreContext _context;
+        private readonly IPetRepository _petRepository;
 
-        public PetController(PetStoreContext context)
+        public PetController(IPetRepository petRepository)
         {
-            _context = context;
-
-            if (_context.PetEntities.Count() == 0)
-            {
-                _context.PetEntities.Add(new PetEntity { Name = "Nala" });
-                _context.SaveChanges();
-            }
+            _petRepository = petRepository;
         }
 
         [HttpGet]
         public IEnumerable<PetEntity> GetAll()
         {
-            return _context.PetEntities.ToList();
+            return _petRepository.List();
         }
 
         [HttpGet("{id}", Name = "GetTodo")]
         public IActionResult GetById(long id)
         {
-            var item = _context.PetEntities.FirstOrDefault(t => t.Id == id);
-            if (item == null)
+            PetEntity entity = _petRepository.FindById(id);
+
+            if (entity == null)
             {
                 return NotFound();
             }
 
-            return new ObjectResult(item);
+            return new ObjectResult(entity);
         }
 
     }
