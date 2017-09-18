@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.EntityFrameworkCore;
-using PetStore.Model.Entity;
+using PetStore.Models.Entity;
 
 namespace PetStore.Model
 {
@@ -16,5 +16,6 @@ namespace PetStore.Model
         }
 
         public DbSet<PetEntity> PetEntities { get; set; }
+        public DbSet<TagEntity> TagEntities { get; set; }
     }
 }

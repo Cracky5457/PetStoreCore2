@@ -11,6 +11,9 @@ using PetStore.Model;
 using Microsoft.EntityFrameworkCore;
 using PetStore.Dao;
 using PetStore.Dao.impl;
+using PetStore.Services;
+using PetStore.Services.impl;
+using PetStore.Configuration;
 
 namespace WebApplication1
 {
@@ -27,8 +30,14 @@ namespace WebApplication1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<PetStoreContext>(opt => opt.UseInMemoryDatabase("PetStore"));
+
             services.AddScoped<IPetRepository, PetRepository>();
+
+            services.AddScoped<IPetService,PetServiceImpl>();
+
             services.AddMvc();
+
+            ConfigurationAutoMapper.configure();
         }
 
 

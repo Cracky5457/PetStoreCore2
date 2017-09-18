@@ -1,12 +1,11 @@
-﻿using PetStore.Models.Entity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PetStore.Models.Entity
+namespace PetStore.Models.Dto
 {
-    public class PetEntity
+    public class PetDto
     {
 
         public long Id { get; set; }
@@ -15,7 +14,7 @@ namespace PetStore.Models.Entity
 
         public string Status { get; set; }
 
-        public List<TagEntity> Tags { get; set; }
+        public List<TagDto> Tags { get; set; }
 
     }
 }

@@ -4,8 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PetStore.Model;
-using PetStore.Model.Entity;
+using PetStore.Models.Entity;
 using PetStore.Dao;
+using PetStore.Services;
+using PetStore.Services.impl;
+using PetStore.Models.Dto;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,27 +17,37 @@ namespace PetStore.Controllers
     [Route("api/[controller]")]
     public class PetController : Controller
     {
-        private readonly IPetRepository _petRepository;
+        private readonly IPetService _petService;
 
-        public PetController(IPetRepository petRepository)
+        public PetController(IPetService petService)
         {
-            _petRepository = petRepository;
+            _petService = petService;
         }
 
         [HttpGet]
-        public IEnumerable<PetEntity> GetAll()
+        public IActionResult GetAll()
         {
-            return _petRepository.List();
+            IEnumerable<PetDto> listPet = _petService.FindAllPet();
+
+            if(listPet == null || !listPet.Any())
+            {
+                return NoContent();
+       
+            }
+
+            return new ObjectResult(listPet);
+
+
         }
 
         [HttpGet("{id}", Name = "GetTodo")]
         public IActionResult GetById(long id)
         {
-            PetEntity entity = _petRepository.FindById(id);
+            PetEntity entity = _petService.FindById(id);
 
             if (entity == null)
             {
-                return NotFound();
+                return NoContent();
             }
 
             return new ObjectResult(entity);

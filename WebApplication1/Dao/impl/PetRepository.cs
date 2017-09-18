@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using PetStore.Model.Entity;
+using PetStore.Models.Entity;
 using PetStore.Model;
 
 namespace PetStore.Dao.impl
@@ -17,8 +17,17 @@ namespace PetStore.Dao.impl
 
             if (_dbContext.PetEntities.Count() == 0)
             {
-                _dbContext.PetEntities.Add(new PetEntity { Name = "Nala" });
-                _dbContext.PetEntities.Add(new PetEntity { Name = "BBL" });
+                _dbContext.PetEntities.Add(new PetEntity
+                {
+                    Name = "Nala",
+                    Tags = new List<TagEntity> { new TagEntity { Name = "Chaton" }, new TagEntity { Name = "Femelle" } }
+                });
+
+                _dbContext.PetEntities.Add(new PetEntity
+                {
+                    Name = "BBL",
+                    Tags = new List<TagEntity> { new TagEntity { Name = "Chaton" }, new TagEntity { Name = "Sterilisé" } }
+                });
 
                 _dbContext.SaveChanges();
             }

@@ -1,14 +1,16 @@
 ﻿using PetStore.Models.Entity;
+using PetStore.Models.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PetStore.Dao
+namespace PetStore.Services
 {
-    public interface IPetRepository
+    public interface IPetService
     {
-        IEnumerable<PetEntity> List();
+        IEnumerable<PetDto> FindAllPet();
+
         PetEntity FindById(long id);
     }
 }
