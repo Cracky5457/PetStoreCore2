@@ -20,12 +20,14 @@ namespace PetStore.Dao.impl
                 _dbContext.PetEntities.Add(new PetEntity
                 {
                     Name = "Nala",
+                    Status = "Not available",
                     Tags = new List<TagEntity> { new TagEntity { Name = "Chaton" }, new TagEntity { Name = "Femelle" } }
                 });
 
                 _dbContext.PetEntities.Add(new PetEntity
                 {
                     Name = "BBL",
+                    Status = "Not available",
                     Tags = new List<TagEntity> { new TagEntity { Name = "Chaton" }, new TagEntity { Name = "Sterilisé" } }
                 });
 

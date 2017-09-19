@@ -1,0 +1,20 @@
+<h1>Pets</h1>
+
+<p *ngIf="!pets"><em>Loading...</em></p>
+
+<table class='table' *ngIf="pets">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Tags</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let pet of pets">
+            <td>{{ pet.name }}</td>
+            <td>{{ pet.status }}</td>
+            <td>{{ pet.tags }}</td>
+        </tr>
+    </tbody>
+</table>
