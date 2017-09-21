@@ -10,6 +10,8 @@ import { HomeComponent } from './components/home/home.component';
 import { FetchPetsComponent } from './components/pets/fetchpets.component';
 import { CounterComponent } from './components/counter/counter.component';
 
+import { PetService } from './components/pets/shared/pet.service';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -29,6 +31,9 @@ import { CounterComponent } from './components/counter/counter.component';
             { path: 'fetch-pets', component: FetchPetsComponent },
             { path: '**', redirectTo: 'home' }
         ])
+    ],
+    providers: [
+        PetService
     ]
 })
 
